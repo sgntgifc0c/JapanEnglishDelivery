@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class Database {
     final private static String url = "jdbc:postgresql://localhost/delivery";
-    final private static String user = "hen";
-    final private static String password = "b67k2258";
+    final private static String user = "postgres";
+    final private static String password = "root";
 
     public static Connection init() throws SQLException {
         
