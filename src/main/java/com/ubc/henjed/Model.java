@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public abstract class Model<T extends Model<T>> {
     // todas as tabelas tem "codigo" como PRIMARY KEY
-    protected int codigo;
+    private int codigo;
     // para verificar se essa instancia existe no banco de dados
-    protected boolean existsInDB;
+    private boolean existsInDB;
 
     public int getCodigo() {
 		return codigo;
@@ -119,8 +119,6 @@ public abstract class Model<T extends Model<T>> {
         var st = conn.prepareStatement(sqlq, Statement.RETURN_GENERATED_KEYS);
 
         insertValues(st, 0);
-
-        System.out.println(st);
 
         var rowsCreated = st.executeUpdate();
 
