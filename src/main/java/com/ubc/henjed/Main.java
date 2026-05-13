@@ -3,7 +3,7 @@ package com.ubc.henjed;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.ubc.henjed.util.Log;
+import com.ubc.henjed.util.CMD;
 import com.ubc.henjed.cli.IUsuario;
 import com.ubc.henjed.cli.UserCliente;
 import com.ubc.henjed.model.*;
@@ -16,18 +16,18 @@ public class Main {
         var fecharPrograma = false;
         var scan = new Scanner(System.in);
 
-        Log.msg("JAPAN ENGLISH DELIVERY");
+        CMD.msg("JAPAN ENGLISH DELIVERY");
 
         while (!fecharPrograma) {
           Model<?> model = null;
           IUsuario ui = null;
           boolean close = false;
 
-          Log.msg("Logar como:");
-          Log.msg("1 - Cliente");
-          Log.msg("2 - Restaurante");
-          Log.msg("3 - Entregador");
-          Log.msg("4 - Sair");
+          CMD.msg("Logar como:");
+          CMD.msg("1 - Cliente");
+          CMD.msg("2 - Restaurante");
+          CMD.msg("3 - Entregador");
+          CMD.msg("4 - Sair");
 
           switch (scan.nextInt()) {
             case 1:
@@ -36,10 +36,10 @@ public class Main {
               break;
             case 4:
               fecharPrograma = true;
-              Log.msg("Tchau");
+              CMD.msg("Tchau");
               break;
             default:
-              Log.msg("Invalido, digite um dos numeros.");
+              CMD.msg("Invalido, digite um dos numeros.");
               break;
           }
 
@@ -47,14 +47,14 @@ public class Main {
             continue;
           }
 
-          Log.msg("Login ou Cadastro?");
-          Log.msg("1 - Login");
-          Log.msg("2 - Cadastro");
-          Log.msg("3 - Voltar");
+          CMD.msg("Login ou Cadastro?");
+          CMD.msg("1 - Login");
+          CMD.msg("2 - Cadastro");
+          CMD.msg("3 - Voltar");
 
           switch (scan.nextInt()) {
             case 1:
-              Log.msg("Digite o ID do " + model.getTablename());
+              CMD.msg("Digite o ID do " + model.getTablename());
               int id = scan.nextInt();
               model.getByCodigo(conn, id);
               break;
@@ -64,19 +64,19 @@ public class Main {
             case 3:
               break;
             default:
-              Log.msg("Opção invalida, voltando...");
+              CMD.msg("Opção invalida, voltando...");
               break;
           }
 
           if (!model.doesItExist()) {
-            Log.msg("Falha na procura do "+model.getTablename()+", Voltando...");
+            CMD.msg("Falha na procura do "+model.getTablename()+", Voltando...");
             continue;
           }
 
           while (!close) {
-            Log.msg("Logado como "+model.getTablename()+", ID: "+model.getCodigo());
+            CMD.msg("Logado como "+model.getTablename()+", ID: "+model.getCodigo());
             ui.exibirMenu();
-            ui.selecao();
+            close = ui.selecao();
           }
         }
 

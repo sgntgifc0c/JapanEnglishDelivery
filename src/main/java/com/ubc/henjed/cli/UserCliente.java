@@ -16,8 +16,8 @@ public class UserCliente implements IUsuario {
 
     }
 
-    public void selecao() {
-        
+    public boolean selecao() {
+        return true;
     }
 
     public void cadastro() {
