@@ -2,6 +2,8 @@ package com.ubc.henjed;
 
 import com.ubc.henjed.cli.IUsuario;
 import com.ubc.henjed.cli.UserCliente;
+import com.ubc.henjed.cli.UserEntregador;
+import com.ubc.henjed.cli.UserRestaurante;
 import com.ubc.henjed.model.*;
 import com.ubc.henjed.util.CMD;
 import java.sql.SQLException;
@@ -15,6 +17,8 @@ public class Main {
         var conn = Database.init();
         var fecharPrograma = false;
         var scan = new Scanner(System.in);
+
+        CMD.setScan(scan);
 
         CMD.msg("JAPAN ENGLISH DELIVERY");
 
@@ -33,6 +37,14 @@ public class Main {
                 case 1:
                     model = new Cliente();
                     ui = new UserCliente((Cliente) model, scan);
+                    break;
+                case 2:
+                    model = new Restaurante();
+                    ui = new UserRestaurante((Restaurante) model, scan);
+                    break;
+                case 3:
+                    model = new Entregador();
+                    ui = new UserEntregador((Entregador) model, scan);
                     break;
                 case 4:
                     fecharPrograma = true;
@@ -59,7 +71,7 @@ public class Main {
                     model.getByCodigo(conn, id);
                     break;
                 case 2:
-                    ui.cadastro();
+                    ui.cadastro(conn);
                     break;
                 case 3:
                     break;

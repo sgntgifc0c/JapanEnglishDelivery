@@ -1,6 +1,7 @@
 package com.ubc.henjed.model;
 
 import com.ubc.henjed.Model;
+import com.ubc.henjed.util.CMD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,6 +29,23 @@ public class Cliente extends Model<Cliente> {
     @Override
     protected String getOrder() {
         return "(nome,cpf,email,telefone,codigo_endereco)";
+    }
+
+    @Override
+    public void cadastroCMD(Connection conn) throws SQLException {
+        setNome(CMD.promptLine("Digite o seu nome", 60));
+        setCpf(CMD.promptLine("Digite seu CPF (apenas numeros)", 11));
+        setEmail(CMD.promptLine("Digite seu Email", 254));
+        setTelefone(
+            CMD.promptLine("Digite seu telefone (não obrigatório)", 15, true)
+        );
+
+        CMD.msg("Agora digite seu endereço:");
+        var endereco = new Endereco();
+        endereco.cadastroCMD(conn);
+        setCodigoEndereco(endereco.getCodigo());
+
+        super.cadastroCMD(conn);
     }
 
     @Override

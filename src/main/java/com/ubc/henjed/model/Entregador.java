@@ -1,6 +1,8 @@
 package com.ubc.henjed.model;
 
 import com.ubc.henjed.Model;
+import com.ubc.henjed.util.CMD;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +22,16 @@ public class Entregador extends Model<Entregador> {
     @Override
     protected String getOrder() {
         return "(nome,cpf,telefone,status)";
+    }
+
+    @Override
+    public void cadastroCMD(Connection conn) throws SQLException {
+        setNome(CMD.promptLine("Digite seu nome", 60));
+        setCpf(CMD.promptLine("Digite seu CPF", 11));
+        setTelefone(CMD.promptLine("Digite seu telefone", 15));
+        setStatus('D');
+
+        super.cadastroCMD(conn);
     }
 
     public Entregador() {

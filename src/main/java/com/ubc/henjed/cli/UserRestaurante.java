@@ -1,17 +1,17 @@
 package com.ubc.henjed.cli;
 
-import com.ubc.henjed.model.Cliente;
+import com.ubc.henjed.model.Restaurante;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class UserCliente implements IUsuario {
+public class UserRestaurante implements IUsuario {
 
-    Cliente cliente;
+    Restaurante restaurante;
     Scanner scan;
 
-    public UserCliente(Cliente cliente, Scanner scan) {
-        this.cliente = cliente;
+    public UserRestaurante(Restaurante cliente, Scanner scan) {
+        this.restaurante = cliente;
         this.scan = scan;
     }
 
@@ -22,6 +22,6 @@ public class UserCliente implements IUsuario {
     }
 
     public void cadastro(Connection conn) throws SQLException {
-        this.cliente.cadastroCMD(conn);
+        this.restaurante.cadastroCMD(conn);
     }
 }

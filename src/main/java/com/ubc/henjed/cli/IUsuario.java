@@ -1,5 +1,8 @@
 package com.ubc.henjed.cli;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 public interface IUsuario {
     // Demonstra o menu de selecao para o usuario
     void exibirMenu();
@@ -8,5 +11,5 @@ public interface IUsuario {
     boolean selecao();
     // Uma interface de usuario para cadastrar um novo modelo para o Banco de dados
     // Após as mudanças a classe guarda o modelo cadastrado no login.
-    void cadastro();
+    void cadastro(Connection conn) throws SQLException;
 }

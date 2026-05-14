@@ -27,6 +27,14 @@ public abstract class Model<T extends Model<T>> {
 
     public abstract String getTablename();
 
+    public void cadastroCMD(Connection conn) throws SQLException {
+        if (this.doesItExist()) {
+            this.sendUpdate(conn);
+        } else {
+            this.sendCreate(conn);
+        }
+    }
+
     protected abstract String getOrder();
 
     // Cada classe baseada no Model deve ter esse metodo para aplicar as variaveis de cada coluna

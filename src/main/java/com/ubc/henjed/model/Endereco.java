@@ -1,6 +1,8 @@
 package com.ubc.henjed.model;
 
 import com.ubc.henjed.Model;
+import com.ubc.henjed.util.CMD;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,12 +18,24 @@ public class Endereco extends Model<Endereco> {
 
     @Override
     public String getTablename() {
-        return "Produto";
+        return "Endereco";
     }
 
     @Override
     protected String getOrder() {
         return "(rua,numero,bairro,cidade,estado,cep)";
+    }
+
+    @Override
+    public void cadastroCMD(Connection conn) throws SQLException {
+        setRua(CMD.promptLine("Digite o nome da sua rua", 100));
+        setNumero(CMD.promptLine("Digite o numero de sua residencia", 4));
+        setBairro(CMD.promptLine("Digite o nome do seu bairro", 33));
+        setCidade(CMD.promptLine("Digite o nome de sua cidade", 33));
+        setEstado(CMD.promptLine("Digite a sigla de seu estado", 2));
+        setCep(CMD.promptLine("Digite seu CEP", 8));
+
+        super.cadastroCMD(conn);
     }
 
     public Endereco() {

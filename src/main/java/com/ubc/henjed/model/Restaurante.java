@@ -1,6 +1,7 @@
 package com.ubc.henjed.model;
 
 import com.ubc.henjed.Model;
+import com.ubc.henjed.util.CMD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,6 +29,29 @@ public class Restaurante extends Model<Restaurante> {
     @Override
     protected String getOrder() {
         return "(nome,cnpj,telefone,categoria,codigo_endereco)";
+    }
+
+    @Override
+    public void cadastroCMD(Connection conn) throws SQLException {
+        setNome(CMD.promptLine("Digite o nome de seu restaurante", 75));
+        setCnpj(CMD.promptLine("Digite seu CNPJ", 14));
+        setTelefone(
+            CMD.promptLine("Digite o telefone do seu restaurante", 15, true)
+        );
+        setCategoria(
+            CMD.promptLine(
+                "Digite a categoria que seu restaurante se encaixa",
+                15,
+                true
+            )
+        );
+
+        CMD.msg("Agora digite o endereço de seu restaurante:");
+        var endereco = new Endereco();
+        endereco.cadastroCMD(conn);
+        setCodigoEndereco(endereco.getCodigo());
+
+        super.cadastroCMD(conn);
     }
 
     public Restaurante() {

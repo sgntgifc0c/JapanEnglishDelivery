@@ -1,6 +1,7 @@
 package com.ubc.henjed.model;
 
 import com.ubc.henjed.Model;
+import com.ubc.henjed.util.CMD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,12 +22,42 @@ public class Veiculo extends Model<Veiculo> {
 
     @Override
     public String getTablename() {
-        return "Produto";
+        return "Veiculo";
     }
 
     @Override
     protected String getOrder() {
         return "(placa,tipo_veiculo,marca,codigo_entregador)";
+    }
+
+    @Override
+    public void cadastroCMD(Connection conn) throws SQLException {
+        setTipoVeiculo(
+            CMD.promptLine(
+                "Selecione tipo do veiculo (B = Bicicleta, C = Carro, M = Moto)",
+                1
+            )
+        );
+        setMarca(CMD.promptLine("Escreva a marca e/ou modelo do veiculo", 70));
+        setPlaca(
+            CMD.promptLine(
+                "Escreva a placa do veiculo (Não é necessario se for Bicicleta)",
+                7
+            )
+        );
+        if (getPlaca().length() == 0 && getTipoVeiculo() != "B") {
+            CMD.msg(
+                "Placa não pode ser vazia se o veiculo não for uma bicicleta, cancelando cadastro..."
+            );
+            return;
+        }
+        super.cadastroCMD(conn);
+    }
+
+    public void cadastroCMD(Connection conn, int codigoEntregador)
+        throws SQLException {
+        this.codigoEntregador = codigoEntregador;
+        this.cadastroCMD(conn);
     }
 
     public Veiculo() {
