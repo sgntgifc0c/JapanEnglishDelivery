@@ -96,11 +96,11 @@ public abstract class Model<T extends Model<T>> {
             resetCounterTo(0);
             for (Object value : questionMarkValues) {
                 switch (value.getClass().getName()) {
-                    case "String":
+                    case "java.lang.String":
                         st.setString(getCounter(), (String) value);
                         break;
-                    case "int":
-                        st.setInt(getCounter(), (int) value);
+                    case "java.lang.Integer": // int
+                        st.setInt(getCounter(), (Integer) value);
                         break;
                     default:
                         break;

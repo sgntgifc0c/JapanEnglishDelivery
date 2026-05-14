@@ -36,15 +36,15 @@ public class Main {
             switch (scan.nextInt()) {
                 case 1:
                     model = new Cliente();
-                    ui = new UserCliente((Cliente) model, scan);
+                    ui = new UserCliente((Cliente) model, scan, conn);
                     break;
                 case 2:
                     model = new Restaurante();
-                    ui = new UserRestaurante((Restaurante) model, scan);
+                    ui = new UserRestaurante((Restaurante) model, scan, conn);
                     break;
                 case 3:
                     model = new Entregador();
-                    ui = new UserEntregador((Entregador) model, scan);
+                    ui = new UserEntregador((Entregador) model, scan, conn);
                     break;
                 case 4:
                     fecharPrograma = true;
@@ -71,7 +71,7 @@ public class Main {
                     model.getByCodigo(conn, id);
                     break;
                 case 2:
-                    ui.cadastro(conn);
+                    ui.cadastro();
                     break;
                 case 3:
                     break;

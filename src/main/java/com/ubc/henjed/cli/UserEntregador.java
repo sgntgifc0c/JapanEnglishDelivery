@@ -9,19 +9,21 @@ public class UserEntregador implements IUsuario {
 
     Entregador entregador;
     Scanner scan;
+    Connection conn;
 
-    public UserEntregador(Entregador cliente, Scanner scan) {
+    public UserEntregador(Entregador cliente, Scanner scan, Connection conn) {
         this.entregador = cliente;
         this.scan = scan;
+        this.conn = conn;
     }
 
     public void exibirMenu() {}
 
-    public boolean selecao() {
+    public boolean selecao() throws SQLException, Exception {
         return true;
     }
 
-    public void cadastro(Connection conn) throws SQLException {
+    public void cadastro() throws SQLException {
         this.entregador.cadastroCMD(conn);
     }
 }

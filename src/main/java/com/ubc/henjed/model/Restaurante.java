@@ -47,7 +47,7 @@ public class Restaurante extends Model<Restaurante> {
         );
 
         CMD.msg("Agora digite o endereço de seu restaurante:");
-        var endereco = new Endereco();
+        var endereco = (this.codigoEndereco >= 0) ? this.getEndereco(conn) : new Endereco();
         endereco.cadastroCMD(conn);
         setCodigoEndereco(endereco.getCodigo());
 
@@ -131,5 +131,16 @@ public class Restaurante extends Model<Restaurante> {
 
     public void setCodigoEndereco(int codigoEndereco) {
         this.codigoEndereco = codigoEndereco;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Nome: %s | CNPJ: %s | Telefone: %s | Categoria: %s | ID: %d", 
+                    this.getNome(),
+                    this.getCnpj(),
+                    this.getTelefone(),
+                    this.getCategoria(),
+                    this.getCodigo()
+                );
     }
 }

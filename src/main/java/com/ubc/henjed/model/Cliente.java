@@ -41,7 +41,8 @@ public class Cliente extends Model<Cliente> {
         );
 
         CMD.msg("Agora digite seu endereço:");
-        var endereco = new Endereco();
+
+        var endereco = (this.codigoEndereco >= 0) ? this.getEndereco(conn) : new Endereco();
         endereco.cadastroCMD(conn);
         setCodigoEndereco(endereco.getCodigo());
 

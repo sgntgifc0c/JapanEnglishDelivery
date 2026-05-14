@@ -1,6 +1,5 @@
 package com.ubc.henjed.cli;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface IUsuario {
@@ -8,8 +7,8 @@ public interface IUsuario {
     void exibirMenu();
     // Verifica o digito do usuario para uma das opções do menu
     // Retorna true se o usuario pediu para fechar o menu
-    boolean selecao();
+    boolean selecao() throws SQLException, Exception;
     // Uma interface de usuario para cadastrar um novo modelo para o Banco de dados
     // Após as mudanças a classe guarda o modelo cadastrado no login.
-    void cadastro(Connection conn) throws SQLException;
+    void cadastro() throws SQLException;
 }

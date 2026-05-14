@@ -9,19 +9,21 @@ public class UserCliente implements IUsuario {
 
     Cliente cliente;
     Scanner scan;
+    Connection conn;
 
-    public UserCliente(Cliente cliente, Scanner scan) {
+    public UserCliente(Cliente cliente, Scanner scan, Connection conn) {
         this.cliente = cliente;
         this.scan = scan;
+        this.conn = conn;
     }
 
     public void exibirMenu() {}
 
-    public boolean selecao() {
+    public boolean selecao() throws SQLException, Exception {
         return true;
     }
 
-    public void cadastro(Connection conn) throws SQLException {
+    public void cadastro() throws SQLException {
         this.cliente.cadastroCMD(conn);
     }
 }

@@ -54,6 +54,7 @@ public class Veiculo extends Model<Veiculo> {
         super.cadastroCMD(conn);
     }
 
+    // esse overload existe para facilitar o cadastramento de veiculos dentro da interface do entregador
     public void cadastroCMD(Connection conn, int codigoEntregador)
         throws SQLException {
         this.codigoEntregador = codigoEntregador;

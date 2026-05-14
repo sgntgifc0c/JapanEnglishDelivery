@@ -128,4 +128,16 @@ public class Endereco extends Model<Endereco> {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Rua: %s | Numero: %s | Bairro: %s | Cidade: %s | Estado: %s | CEP: %s", 
+                    this.getRua(),
+                    this.getNumero(),
+                    this.getBairro(),
+                    this.getCidade(),
+                    this.getEstado(),
+                    this.getCep()
+                );
+    }
 }
