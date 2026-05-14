@@ -1,87 +1,86 @@
 package com.ubc.henjed.model;
 
+import com.ubc.henjed.Model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ubc.henjed.Model;
-
 public class Entregador extends Model<Entregador> {
+
     protected String nome;
     protected String cpf;
     protected String telefone;
     protected char status;
 
-	@Override
-	public String getTablename() {
-		return "Entregador";
-	}
+    @Override
+    public String getTablename() {
+        return "Entregador";
+    }
 
-	@Override
-	protected String getOrder() {
-		return "(nome,cpf,telefone,status)";
-	}
+    @Override
+    protected String getOrder() {
+        return "(nome,cpf,telefone,status)";
+    }
 
     public Entregador() {
         super();
     }
 
-    
-
     public Entregador(String nome, String cpf, String telefone, char status) {
         super();
-		this.nome = nome;
-		this.cpf = cpf;
-		this.telefone = telefone;
-		this.status = status;
-	}
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.status = status;
+    }
 
-	@Override
+    @Override
     protected void setValues(ResultSet rs) throws SQLException {
         this.nome = rs.getString("nome");
         this.cpf = rs.getString("cpf");
         this.telefone = rs.getString("telefone");
-		this.status = rs.getString("status").charAt(0);
+        this.status = rs.getString("status").charAt(0);
     }
 
     @Override
-    protected void insertValues(PreparedStatement st, int currentOrder) throws SQLException {
+    protected void insertValues(PreparedStatement st, int currentOrder)
+        throws SQLException {
         super.insertValues(st, currentOrder);
         st.setString(getCounter(), this.nome);
-		st.setString(getCounter(), this.cpf);
-		st.setString(getCounter(), this.telefone);
-		st.setString(getCounter(), "" + this.status);
+        st.setString(getCounter(), this.cpf);
+        st.setString(getCounter(), this.telefone);
+        st.setString(getCounter(), "" + this.status);
     }
 
     public String getNome() {
-		return nome;
-	}
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public String getTelefone() {
-		return telefone;
-	}
+    public String getTelefone() {
+        return telefone;
+    }
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-	public char getStatus() {
-		return status;
-	}
+    public char getStatus() {
+        return status;
+    }
 
-	public void setStatus(char status) {
-		this.status = status;
-	}
+    public void setStatus(char status) {
+        this.status = status;
+    }
 }

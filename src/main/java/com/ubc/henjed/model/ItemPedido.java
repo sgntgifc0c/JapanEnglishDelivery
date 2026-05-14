@@ -1,13 +1,13 @@
 package com.ubc.henjed.model;
 
+import com.ubc.henjed.Model;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
-
-import com.ubc.henjed.Model;
 
 public class ItemPedido extends Model<ItemPedido> {
+
     protected int codigoPedido;
     protected int codigoProduto;
     protected int quantidade;
@@ -53,7 +53,8 @@ public class ItemPedido extends Model<ItemPedido> {
     }
 
     @Override
-    public void insertValues(PreparedStatement st, int currentOrder) throws SQLException {
+    public void insertValues(PreparedStatement st, int currentOrder)
+        throws SQLException {
         super.insertValues(st, currentOrder);
         st.setInt(getCounter(), this.codigoPedido);
         st.setInt(getCounter(), this.codigoProduto);

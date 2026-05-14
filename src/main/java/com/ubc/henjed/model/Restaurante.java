@@ -1,13 +1,13 @@
 package com.ubc.henjed.model;
 
+import com.ubc.henjed.Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ubc.henjed.Model;
-
 public class Restaurante extends Model<Restaurante> {
+
     protected String nome;
     protected String cnpj;
     protected String telefone;
@@ -20,11 +20,13 @@ public class Restaurante extends Model<Restaurante> {
         return end;
     }
 
-    @Override public String getTablename() {
+    @Override
+    public String getTablename() {
         return "Restaurante";
     }
 
-    @Override protected String getOrder() {
+    @Override
+    protected String getOrder() {
         return "(nome,cnpj,telefone,categoria,codigo_endereco)";
     }
 
@@ -32,7 +34,13 @@ public class Restaurante extends Model<Restaurante> {
         super();
     }
 
-    public Restaurante(String nome, String cnpj, String telefone, String categoria, int codigoEndereco) {
+    public Restaurante(
+        String nome,
+        String cnpj,
+        String telefone,
+        String categoria,
+        int codigoEndereco
+    ) {
         super();
         this.nome = nome;
         this.cnpj = cnpj;
@@ -51,15 +59,16 @@ public class Restaurante extends Model<Restaurante> {
     }
 
     @Override
-    protected void insertValues(PreparedStatement st, int currentOrder) throws SQLException {
+    protected void insertValues(PreparedStatement st, int currentOrder)
+        throws SQLException {
         super.insertValues(st, currentOrder);
         st.setString(getCounter(), this.nome);
-		st.setString(getCounter(), this.cnpj);
-		st.setString(getCounter(), this.telefone);
+        st.setString(getCounter(), this.cnpj);
+        st.setString(getCounter(), this.telefone);
         st.setString(getCounter(), this.categoria);
-		st.setInt(getCounter(), this.codigoEndereco);
+        st.setInt(getCounter(), this.codigoEndereco);
     }
-    
+
     public String getNome() {
         return nome;
     }

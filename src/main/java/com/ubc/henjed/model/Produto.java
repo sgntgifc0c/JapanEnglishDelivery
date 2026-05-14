@@ -1,13 +1,13 @@
 package com.ubc.henjed.model;
 
-import java.sql.ResultSet;
+import com.ubc.henjed.Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ubc.henjed.Model;
-
 public class Produto extends Model<Produto> {
+
     protected String nome;
     protected String descricao = "";
     protected double preco;
@@ -34,7 +34,13 @@ public class Produto extends Model<Produto> {
         super();
     }
 
-    public Produto(String nome, String descricao, double preco, String categoria, int codigoRestaurante) {
+    public Produto(
+        String nome,
+        String descricao,
+        double preco,
+        String categoria,
+        int codigoRestaurante
+    ) {
         super();
         this.nome = nome;
         this.descricao = descricao;
@@ -53,42 +59,52 @@ public class Produto extends Model<Produto> {
     }
 
     @Override
-    protected void insertValues(PreparedStatement st, int currentOrder) throws SQLException {
+    protected void insertValues(PreparedStatement st, int currentOrder)
+        throws SQLException {
         super.insertValues(st, currentOrder);
         st.setString(getCounter(), this.nome);
-		st.setString(getCounter(), this.descricao);
-		st.setDouble(getCounter(), this.preco);
+        st.setString(getCounter(), this.descricao);
+        st.setDouble(getCounter(), this.preco);
         st.setString(getCounter(), this.categoria);
-		st.setInt(getCounter(), this.codigoRestaurante);
+        st.setInt(getCounter(), this.codigoRestaurante);
     }
 
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public String getDescricao() {
         return descricao;
     }
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
     public double getPreco() {
         return preco;
     }
+
     public void setPreco(double preco) {
         this.preco = preco;
     }
+
     public String getCategoria() {
         return categoria;
     }
+
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
     public int getCodigoRestaurante() {
         return codigoRestaurante;
     }
+
     public void setCodigoRestaurante(int codigoRestaurante) {
         this.codigoRestaurante = codigoRestaurante;
     }

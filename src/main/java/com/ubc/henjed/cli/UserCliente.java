@@ -4,6 +4,7 @@ import com.ubc.henjed.model.Cliente;
 import java.util.Scanner;
 
 public class UserCliente implements IUsuario {
+
     Cliente cliente;
     Scanner scan;
 
@@ -12,15 +13,11 @@ public class UserCliente implements IUsuario {
         this.scan = scan;
     }
 
-    public void exibirMenu() {
-
-    }
+    public void exibirMenu() {}
 
     public boolean selecao() {
         return true;
     }
 
-    public void cadastro() {
-        
-    }
+    public void cadastro() {}
 }
