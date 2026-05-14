@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Restaurante extends Model<Restaurante> {
 
@@ -32,7 +33,7 @@ public class Restaurante extends Model<Restaurante> {
     }
 
     @Override
-    public void cadastroCMD(Connection conn) throws SQLException {
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
         setNome(CMD.promptLine("Digite o nome de seu restaurante", 75));
         setCnpj(CMD.promptLine("Digite seu CNPJ", 14));
         setTelefone(
@@ -47,11 +48,22 @@ public class Restaurante extends Model<Restaurante> {
         );
 
         CMD.msg("Agora digite o endereço de seu restaurante:");
-        var endereco = (this.codigoEndereco >= 0) ? this.getEndereco(conn) : new Endereco();
+        var endereco = (this.codigoEndereco >= 0)
+            ? this.getEndereco(conn)
+            : new Endereco();
         endereco.cadastroCMD(conn);
         setCodigoEndereco(endereco.getCodigo());
 
         super.cadastroCMD(conn);
+    }
+
+    public ArrayList<Produto> getCardapio(Connection conn)
+        throws SQLException, Exception {
+        return new Produto().getCollection(
+            conn,
+            "WHERE codigo_restaurante = ?",
+            this.getCodigo()
+        );
     }
 
     public Restaurante() {
@@ -135,12 +147,13 @@ public class Restaurante extends Model<Restaurante> {
 
     @Override
     public String toString() {
-        return String.format("Nome: %s | CNPJ: %s | Telefone: %s | Categoria: %s | ID: %d", 
-                    this.getNome(),
-                    this.getCnpj(),
-                    this.getTelefone(),
-                    this.getCategoria(),
-                    this.getCodigo()
-                );
+        return String.format(
+            "Nome: %s | CNPJ: %s | Telefone: %s | Categoria: %s | ID: %d",
+            this.getNome(),
+            this.getCnpj(),
+            this.getTelefone(),
+            this.getCategoria(),
+            this.getCodigo()
+        );
     }
 }

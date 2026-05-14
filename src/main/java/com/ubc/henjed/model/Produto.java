@@ -2,7 +2,6 @@ package com.ubc.henjed.model;
 
 import com.ubc.henjed.Model;
 import com.ubc.henjed.util.CMD;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,16 +32,26 @@ public class Produto extends Model<Produto> {
     }
 
     @Override
-    public void cadastroCMD(Connection conn) throws SQLException {
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
         setNome(CMD.promptLine("Digite o nome do Produto", 75));
-        setDescricao(CMD.promptLine("Digite a descricao do Produto", 100, true));
-        setPreco(Double.valueOf(CMD.promptLine("Digite o preco do produto (Formato: 00000.00)", 8)));
+        setDescricao(
+            CMD.promptLine("Digite a descricao do Produto", 100, true)
+        );
+        setPreco(
+            Double.valueOf(
+                CMD.promptLine(
+                    "Digite o preco do produto (Formato: 00000.00)",
+                    8
+                )
+            )
+        );
         setCategoria(CMD.promptLine("Digite a categoria do Produto", 15));
 
         super.cadastroCMD(conn);
     }
 
-    public void cadastroCMD(Connection conn, int codigoRestaurante) throws SQLException {
+    public void cadastroCMD(Connection conn, int codigoRestaurante)
+        throws SQLException, Exception {
         this.codigoRestaurante = codigoRestaurante;
         this.cadastroCMD(conn);
     }
@@ -124,5 +133,17 @@ public class Produto extends Model<Produto> {
 
     public void setCodigoRestaurante(int codigoRestaurante) {
         this.codigoRestaurante = codigoRestaurante;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "Nome: %s | Descrição: %s | Preco: %f | Categoria: %s | ID: %d",
+            this.getNome(),
+            this.getDescricao(),
+            this.getPreco(),
+            this.getCategoria(),
+            this.getCodigo()
+        );
     }
 }

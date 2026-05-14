@@ -32,7 +32,7 @@ public class Cliente extends Model<Cliente> {
     }
 
     @Override
-    public void cadastroCMD(Connection conn) throws SQLException {
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
         setNome(CMD.promptLine("Digite o seu nome", 60));
         setCpf(CMD.promptLine("Digite seu CPF (apenas numeros)", 11));
         setEmail(CMD.promptLine("Digite seu Email", 254));
@@ -42,7 +42,9 @@ public class Cliente extends Model<Cliente> {
 
         CMD.msg("Agora digite seu endereço:");
 
-        var endereco = (this.codigoEndereco >= 0) ? this.getEndereco(conn) : new Endereco();
+        var endereco = (this.codigoEndereco >= 0)
+            ? this.getEndereco(conn)
+            : new Endereco();
         endereco.cadastroCMD(conn);
         setCodigoEndereco(endereco.getCodigo());
 
@@ -125,5 +127,16 @@ public class Cliente extends Model<Cliente> {
 
     public void setCodigoEndereco(int codigoEndereco) {
         this.codigoEndereco = codigoEndereco;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "Nome: %s | CPF: %s | Telefone: %s | Email: %s",
+            this.getNome(),
+            this.getCpf(),
+            this.getTelefone(),
+            this.getEmail()
+        );
     }
 }

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Entregador extends Model<Entregador> {
 
@@ -13,6 +14,10 @@ public class Entregador extends Model<Entregador> {
     protected String cpf;
     protected String telefone;
     protected char status;
+
+    public ArrayList<Veiculo> getAllVeiculos(Connection conn) throws SQLException, Exception {
+        return new Veiculo().getCollection(conn, "WHERE codigo_entregador = ?", this.getCodigo());
+    }
 
     @Override
     public String getTablename() {
@@ -25,7 +30,7 @@ public class Entregador extends Model<Entregador> {
     }
 
     @Override
-    public void cadastroCMD(Connection conn) throws SQLException {
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
         setNome(CMD.promptLine("Digite seu nome", 60));
         setCpf(CMD.promptLine("Digite seu CPF", 11));
         setTelefone(CMD.promptLine("Digite seu telefone", 15));
@@ -94,5 +99,10 @@ public class Entregador extends Model<Entregador> {
 
     public void setStatus(char status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Nome: %s | Status: %s | Telefone: %s | CPF: %s", this.getNome(),this.getStatus(),this.getTelefone(),this.getCpf());
     }
 }

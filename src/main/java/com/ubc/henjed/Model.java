@@ -18,6 +18,10 @@ public abstract class Model<T extends Model<T>> {
         return codigo;
     }
 
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
     public boolean doesItExist() {
         return existsInDB;
     }
@@ -27,7 +31,7 @@ public abstract class Model<T extends Model<T>> {
 
     public abstract String getTablename();
 
-    public void cadastroCMD(Connection conn) throws SQLException {
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
         if (this.doesItExist()) {
             this.sendUpdate(conn);
         } else {
@@ -71,6 +75,10 @@ public abstract class Model<T extends Model<T>> {
         st.close();
     }
 
+    public ArrayList<T> getCollection(Connection conn) throws Exception {
+        return getCollection(conn, "");
+    }
+
     // Esse código usa generics para evitar repetição.
     public ArrayList<T> getCollection(
         Connection conn,
@@ -112,6 +120,7 @@ public abstract class Model<T extends Model<T>> {
             while (rs.next()) {
                 @SuppressWarnings("unchecked")
                 var inst = (T) constructorModel.newInstance();
+                inst.setCodigo(rs.getInt("codigo"));
                 inst.setValues(rs);
                 result_list.add(inst);
             }

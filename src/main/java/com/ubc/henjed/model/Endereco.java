@@ -27,7 +27,7 @@ public class Endereco extends Model<Endereco> {
     }
 
     @Override
-    public void cadastroCMD(Connection conn) throws SQLException {
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
         setRua(CMD.promptLine("Digite o nome da sua rua", 100));
         setNumero(CMD.promptLine("Digite o numero de sua residencia", 4));
         setBairro(CMD.promptLine("Digite o nome do seu bairro", 33));
@@ -131,13 +131,14 @@ public class Endereco extends Model<Endereco> {
 
     @Override
     public String toString() {
-        return String.format("Rua: %s | Numero: %s | Bairro: %s | Cidade: %s | Estado: %s | CEP: %s", 
-                    this.getRua(),
-                    this.getNumero(),
-                    this.getBairro(),
-                    this.getCidade(),
-                    this.getEstado(),
-                    this.getCep()
-                );
+        return String.format(
+            "Rua: %s | Numero: %s | Bairro: %s | Cidade: %s | Estado: %s | CEP: %s",
+            this.getRua(),
+            this.getNumero(),
+            this.getBairro(),
+            this.getCidade(),
+            this.getEstado(),
+            this.getCep()
+        );
     }
 }

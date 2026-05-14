@@ -40,4 +40,36 @@ public class CMD {
     public static String promptLine(String msg, int maxChars) {
         return promptLine(msg, maxChars, false);
     }
+
+    public static boolean YorN(String msg) {
+        boolean result = false;
+        boolean resultGiven = false;
+        CMD.msg(msg + " (Sim ou Não):");
+
+        while (!resultGiven) {
+            switch (scanner.next()) {
+                case "S":
+                case "s":
+                case "Sim":
+                case "sim":
+                    result = true;
+                    resultGiven = true;
+                    break;
+                case "N":
+                case "n":
+                case "Não":
+                case "Nao":
+                case "não":
+                case "nao":
+                    result = false;
+                    resultGiven = true;
+                    break;
+                default:
+                    CMD.msg("Opção errada, digite denovo");
+                    break;
+            }
+        }
+
+        return result;
+    }
 }

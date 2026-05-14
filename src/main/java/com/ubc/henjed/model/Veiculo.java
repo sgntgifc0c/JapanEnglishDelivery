@@ -31,7 +31,7 @@ public class Veiculo extends Model<Veiculo> {
     }
 
     @Override
-    public void cadastroCMD(Connection conn) throws SQLException {
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
         setTipoVeiculo(
             CMD.promptLine(
                 "Selecione tipo do veiculo (B = Bicicleta, C = Carro, M = Moto)",
@@ -55,8 +55,8 @@ public class Veiculo extends Model<Veiculo> {
     }
 
     // esse overload existe para facilitar o cadastramento de veiculos dentro da interface do entregador
-    public void cadastroCMD(Connection conn, int codigoEntregador)
-        throws SQLException {
+    public void cadastroCMD(Connection conn, int codigoEntregador) throws Exception,
+         SQLException {
         this.codigoEntregador = codigoEntregador;
         this.cadastroCMD(conn);
     }
@@ -126,5 +126,14 @@ public class Veiculo extends Model<Veiculo> {
 
     public void setCodigoEntregador(int codigoEntregador) {
         this.codigoEntregador = codigoEntregador;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Tipo de Veiculo: %s | Marca: %s | Placa: %s",
+            this.getTipoVeiculo(),
+            this.getMarca(),
+            this.getPlaca()
+        );
     }
 }

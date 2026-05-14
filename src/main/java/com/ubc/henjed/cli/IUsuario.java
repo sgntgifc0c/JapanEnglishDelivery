@@ -10,5 +10,5 @@ public interface IUsuario {
     boolean selecao() throws SQLException, Exception;
     // Uma interface de usuario para cadastrar um novo modelo para o Banco de dados
     // Após as mudanças a classe guarda o modelo cadastrado no login.
-    void cadastro() throws SQLException;
+    void cadastro() throws SQLException, Exception;
 }

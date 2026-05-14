@@ -1,10 +1,13 @@
 package com.ubc.henjed.model;
 
 import com.ubc.henjed.Model;
+import com.ubc.henjed.util.CMD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
 
 public class Pedido extends Model<Pedido> {
 
@@ -31,6 +34,28 @@ public class Pedido extends Model<Pedido> {
         return ent;
     }
 
+    public double getValorTotal(Connection conn)
+        throws SQLException, Exception {
+        var list = getAllItems(conn);
+        double result = 0;
+
+        for (ItemPedido item : list) {
+            var produto = item.getProduto(conn);
+            result += produto.preco * item.quantidade;
+        }
+
+        return result;
+    }
+
+    public ArrayList<ItemPedido> getAllItems(Connection conn)
+        throws SQLException, Exception {
+        return new ItemPedido().getCollection(
+            conn,
+            "WHERE codigo_pedido = ?",
+            this.getCodigo()
+        );
+    }
+
     @Override
     public String getTablename() {
         return "Pedido";
@@ -39,6 +64,32 @@ public class Pedido extends Model<Pedido> {
     @Override
     protected String getOrder() {
         return "(codigo_cliente,codigo_restaurante,codigo_entregador,status)";
+    }
+
+    @Override
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
+        var rest = Integer.valueOf(
+            CMD.promptLine("Digite o ID do restaurante:", 3)
+        );
+
+        var re = new Restaurante();
+        re.getByCodigo(conn, rest);
+
+        if (!re.doesItExist()) {
+            CMD.msg("Restaurante não encontrado, voltando...");
+            return;
+        }
+
+        setCodigoRestaurante(rest);
+        setStatus('P');
+
+        super.cadastroCMD(conn);
+    }
+
+    public void cadastroCMD(Connection conn, int codigoCliente)
+        throws SQLException, Exception {
+        setCodigoCliente(codigoCliente);
+        this.cadastroCMD(conn);
     }
 
     public Pedido() {
@@ -72,7 +123,11 @@ public class Pedido extends Model<Pedido> {
         super.insertValues(st, currentOrder);
         st.setInt(getCounter(), this.codigoCliente);
         st.setInt(getCounter(), this.codigoRestaurante);
-        st.setInt(getCounter(), this.codigoEntregador);
+        if (this.codigoEntregador <= 0) {
+            st.setNull(getCounter(), Types.INTEGER);
+        } else {
+            st.setInt(getCounter(), this.codigoEntregador);
+        }
         st.setString(getCounter(), "" + this.status);
     }
 
@@ -106,5 +161,14 @@ public class Pedido extends Model<Pedido> {
 
     public void setStatus(char status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "ID: %d | Status: %c",
+            this.getCodigo(),
+            this.getStatus()
+        );
     }
 }

@@ -23,7 +23,7 @@ public class UserEntregador implements IUsuario {
         return true;
     }
 
-    public void cadastro() throws SQLException {
+    public void cadastro() throws SQLException, Exception {
         this.entregador.cadastroCMD(conn);
     }
 }

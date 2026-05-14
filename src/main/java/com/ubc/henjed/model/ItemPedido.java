@@ -1,6 +1,7 @@
 package com.ubc.henjed.model;
 
 import com.ubc.henjed.Model;
+import com.ubc.henjed.util.CMD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,6 +33,34 @@ public class ItemPedido extends Model<ItemPedido> {
     @Override
     protected String getOrder() {
         return "(codigo_pedido,codigo_produto,quantidade)";
+    }
+
+    @Override
+    public void cadastroCMD(Connection conn) throws SQLException, Exception {
+        setCodigoProduto(
+            Integer.valueOf(
+                CMD.promptLine(
+                    "Digite o ID do produto que você quer escolher:",
+                    100
+                )
+            )
+        );
+        setQuantidade(
+            Integer.valueOf(
+                CMD.promptLine(
+                    "Digite a quantidade que você quer deste produto:",
+                    100
+                )
+            )
+        );
+
+        super.cadastroCMD(conn);
+    }
+
+    public void cadastroCMD(Connection conn, int codigoPedido)
+        throws SQLException, Exception {
+        setCodigoPedido(codigoPedido);
+        this.cadastroCMD(conn);
     }
 
     public ItemPedido() {
@@ -83,5 +112,14 @@ public class ItemPedido extends Model<ItemPedido> {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "ID do Produto: %s | Quantidade: %d",
+            this.getCodigoProduto(),
+            this.getQuantidade()
+        );
     }
 }
