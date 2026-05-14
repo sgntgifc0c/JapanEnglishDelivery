@@ -7,35 +7,27 @@
    DISCIPLINA: Banco de Dados
    PROFESSOR: Caio Gustavo Rodrigues da Cruz
    DATA: 01/05/2026
- 
+
    DESCRIÇÃO:
    Criação das tabelas para o banco de dados
- 
+
    REFERÊNCIA:
    Script baseado no dicionário de dados versão <X.X>
    ========================================================= */
- 
- 
+
+
 /* =========================================================
    CONFIGURAÇÕES INICIAIS
    ========================================================= */
- 
+
 -- Define schema (se aplicável)
 -- SET search_path TO public;
- 
- 
+
+
 /* =========================================================
    CRIAÇÃO DE OBJETOS
    ========================================================= */
- 
 
-CREATE TABLE Cliente (
-   codigo SERIAL PRIMARY KEY,
-   nome varchar(60) NOT NULL,
-   cpf varchar(11) NOT NULL,
-   email varchar(254) NOT NULL,
-   telefone varchar(15)
-);
 
 CREATE TABLE Endereco (
    codigo SERIAL PRIMARY KEY,
@@ -45,6 +37,18 @@ CREATE TABLE Endereco (
    cidade varchar(33) NOT NULL,
    estado varchar(2) NOT NULL, --sigla
    cep varchar(8) NOT NULL
+);
+
+CREATE TABLE Cliente (
+   codigo SERIAL PRIMARY KEY,
+   nome varchar(60) NOT NULL,
+   cpf varchar(11) NOT NULL,
+   email varchar(254) NOT NULL,
+   telefone varchar(15),
+   codigo_endereco int NOT NULL,
+   CONSTRAINT fk_endereco
+      FOREIGN KEY (codigo_endereco)
+      REFERENCES Endereco (codigo)
 );
 
 CREATE TABLE Entregador (
@@ -94,7 +98,6 @@ CREATE TABLE Pedido (
    codigo SERIAL PRIMARY KEY,
    codigo_cliente int NOT NULL,
    codigo_restaurante int NOT NULL,
-   codigo_endereco int NOT NULL,
    codigo_entregador int,
    status varchar(1) NOT NULL DEFAULT 'P',
    CONSTRAINT fk_cliente
@@ -103,9 +106,6 @@ CREATE TABLE Pedido (
    CONSTRAINT fk_restaurante
       FOREIGN KEY (codigo_restaurante)
       REFERENCES Restaurante (codigo),
-   CONSTRAINT fk_endereco
-      FOREIGN KEY (codigo_endereco)
-      REFERENCES Endereco (codigo),
    CONSTRAINT fk_entregador
       FOREIGN KEY (codigo_entregador)
       REFERENCES Entregador (codigo)
@@ -123,13 +123,13 @@ CREATE TABLE ItemPedido (
       FOREIGN KEY (codigo_produto)
       REFERENCES Produto (codigo)
 );
- 
+
 /* =========================================================
 OBSERVAÇÕES
 ========================================================= */
- 
+
 -- Qualquer informação adicional relevante
 -- Ex: dependências entre scripts, ordem de execução, etc.
- 
+
 -- Quantidade maxima de caracteres de email:
--- https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address#574698 
+-- https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address#574698
