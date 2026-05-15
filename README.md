@@ -28,4 +28,8 @@ A arquitetura do sistema foi desenhada com foco na aplicação prática dos quat
 *  `Entregador`: Armazenar as informações básicas como nome, CPF, telefone e status.
 * `Database`: Ele é o principal responsável por estabelecer uma conexão com um banco de dados.
 * `Cliente`: Responsável por gerenciar os dados e informações do usuário.
+* `IUsuario`: Define as operações básicas de interação do usuário no sistema.
+* `UserCliente`: Ela controla as ações que o cliente pode fazer no sistema do delivery.
+* `UserEntregador`: Representa a área de interação do entregador no sistema.
+* `UserRestaurante`: Responsável por controlar as ações do restaurante dentro do sistems.
 
