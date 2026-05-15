@@ -25,7 +25,9 @@ A arquitetura do sistema foi desenhada com foco na aplicação prática dos quat
 * `Model`: Ela é uma base que padroniza e facilita as operações de banco de dados nas outras classes do sistema.
 * `Endereço`: Responsável por armazenar e gerenciar os dados de um endereço, além de realizar sua integração com o banco de dados.
 * `Veiculo`: Gerencia o armazenamento e também organiza os dados de um veículo, como placa, tipo, marca e entregador associado.
-*  `Entregador`: Armazenar as informações básicas como nome, CPF, telefone e status.
+* `Entregador`: Armazenar as informações básicas como nome, CPF, telefone e status.
 * `Database`: Ele é o principal responsável por estabelecer uma conexão com um banco de dados.
 * `Cliente`: Responsável por gerenciar os dados e informações do usuário.
+* `Bebidas`: Armazena as informações relacionadas às bebidas cadastradas no sistema.
+* `Sobremesa`: Modela os produtos de sobremesa disponíveis no aplicativo de delivery
 
