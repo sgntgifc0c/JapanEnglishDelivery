@@ -1,11 +1,11 @@
 # Japan English Delivery - Sistema de Gerenciamento de Delivery de Comida
 
 **Integrantes do Grupo:**
-<br> *Fernanda Akemi Martins Sanpei - 43931251* <br>
+<br> *Henrique de Aguiar Fernandes - 43667104* <br>
+*Fernanda Akemi Martins Sanpei - 43931251* <br>
 *Pedro Viana da Silva - 43477089* <br>
 *Gabriel Romão da Silva - 41881184* <br>
 *Geziel de Andrade - 43608906* <br>
-*Henrique de Aguiar Fernandes - 43667104* <br>
 *Luiz Eduardo dos Reis - 42973759* <br>
 
 
@@ -39,4 +39,3 @@ E para os entregadores, o encapsulamento garante a integridade dos dados, enquan
 * `UserCliente`: Ela controla as ações que o cliente pode fazer no sistema do delivery.
 * `UserEntregador`: Representa a área de interação do entregador no sistema.
 * `UserRestaurante`: Responsável por controlar as ações do restaurante dentro do sistema.
-
