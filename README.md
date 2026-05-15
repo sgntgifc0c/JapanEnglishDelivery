@@ -39,3 +39,6 @@ E para os entregadores, o encapsulamento garante a integridade dos dados, enquan
 * `UserCliente`: Ela controla as ações que o cliente pode fazer no sistema do delivery.
 * `UserEntregador`: Representa a área de interação do entregador no sistema.
 * `UserRestaurante`: Responsável por controlar as ações do restaurante dentro do sistema.
+
+Video do codigo:
+https://youtu.be/HX3s6e7Vd9g
