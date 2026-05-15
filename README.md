@@ -29,7 +29,7 @@ A arquitetura do sistema foi desenhada com foco na aplicação prática dos quat
 * `ItemPedido`: Representa um item dentro de um pedido (carrinho/compra) em um sistema de pedidos, funcionando como uma entidade de banco de dados.
 * `Pedido`: Armazena o pedido feito por um cliente em um restaurante.
 * `Produto`: Ela representa (prato/item do cardápio) de um restaurante dentro do sistema.
-* `Entregador`: Armazenar as informações básicas como nome, CPF, telefone e status.
+* `Entregador`: Armazena as informações básicas do entregador cadastrado como nome, CPF, telefone.
 * `Database`: Ele é o principal responsável por estabelecer uma conexão com um banco de dados.
 * `Cliente`: Responsável por gerenciar os dados e informações do usuário.
 * `IUsuario`: Define as operações básicas de interação do usuário no sistema.
