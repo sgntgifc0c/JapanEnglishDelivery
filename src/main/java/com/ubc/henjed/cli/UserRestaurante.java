@@ -125,7 +125,7 @@ public class UserRestaurante implements IUsuario {
                         "Selecione, esse pedido esta Pronto ou esta em Preparo? (R ou P respectivamente)",
                         1
                     );
-                    if (result != "P" && result != "R") {
+                    if (!result.contains("R") && !result.contains("P")) {
                         CMD.msg("Resposta Invalida, tente denovo");
                         continue;
                     }

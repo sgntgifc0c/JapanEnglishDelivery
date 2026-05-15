@@ -2,8 +2,8 @@
 
 **Integrantes do Grupo:**
 <br> *Henrique de Aguiar Fernandes - 43667104* <br>
-*Fernanda Akemi Martins Sanpei - 43931251* <br>
 *Pedro Viana da Silva - 43477089* <br>
+*Fernanda Akemi Martins Sanpei - 43931251* <br>
 *Gabriel Romão da Silva - 41881184* <br>
 *Geziel de Andrade - 43608906* <br>
 *Luiz Eduardo dos Reis - 42973759* <br>

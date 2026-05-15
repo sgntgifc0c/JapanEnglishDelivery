@@ -109,7 +109,9 @@ public class UserEntregador implements IUsuario {
                     1
                 );
                 if (
-                    statusNovo != "E" || statusNovo != "F" || statusNovo != "C"
+                    !statusNovo.contains("E") &&
+                    !statusNovo.contains("F") &&
+                    !statusNovo.contains("C")
                 ) {
                     CMD.msg("Opção invalida, escreva denovo");
                     continue;
