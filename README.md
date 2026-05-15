@@ -25,11 +25,15 @@ A arquitetura do sistema foi desenhada com foco na aplicação prática dos quat
 * `Model`: Ela é uma base que padroniza e facilita as operações de banco de dados nas outras classes do sistema.
 * `Endereço`: Responsável por armazenar e gerenciar os dados de um endereço, além de realizar sua integração com o banco de dados.
 * `Veiculo`: Gerencia o armazenamento e também organiza os dados de um veículo, como placa, tipo, marca e entregador associado.
-*  `Entregador`: Armazenar as informações básicas como nome, CPF, telefone e status.
+* `Restaurante`: Representa um restaurante cadastrado no sistema, sendo uma das entidades principais do modelo.
+* `ItemPedido`: Representa um item dentro de um pedido (carrinho/compra) em um sistema de pedidos, funcionando como uma entidade de banco de dados.
+* `Pedido`: Armazena o pedido feito por um cliente em um restaurante.
+* `Produto`: Ela representa (prato/item do cardápio) de um restaurante dentro do sistema.
+* `Entregador`: Armazenar as informações básicas como nome, CPF, telefone e status.
 * `Database`: Ele é o principal responsável por estabelecer uma conexão com um banco de dados.
 * `Cliente`: Responsável por gerenciar os dados e informações do usuário.
 * `IUsuario`: Define as operações básicas de interação do usuário no sistema.
 * `UserCliente`: Ela controla as ações que o cliente pode fazer no sistema do delivery.
 * `UserEntregador`: Representa a área de interação do entregador no sistema.
-* `UserRestaurante`: Responsável por controlar as ações do restaurante dentro do sistems.
+* `UserRestaurante`: Responsável por controlar as ações do restaurante dentro do sistema.
 
