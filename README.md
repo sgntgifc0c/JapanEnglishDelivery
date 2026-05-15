@@ -11,9 +11,11 @@
 
 
 ## Sistema 💻
-O Japan English Delivery é um sistema de gerenciamento de pedidos desenvolvido em Java. O objetivo principal deste projeto é processar o fluxo completo de um cliente em um Ponto de Venda (PDV) — desde a visualização do cardápio e montagem do carrinho, até o cálculo financeiro e a finalização da compra, interagindo com o usuário através de uma interface.
+O Japan English Delivery é um sistema de gerenciamento de pedidos desenvolvido em Java. O objetivo principal deste projeto é processar o fluxo completo de um cliente em um Ponto de Venda (PDV) — desde a visualização do cardápio e montagem do carrinho, até o cálculo financeiro e a finalização da compra, interagindo com o cliente através de uma interface.
 
-A arquitetura do sistema foi desenhada com foco na aplicação prática dos quatro pilares da Programação Orientada a Objetos (POO). O encapsulamento garante a segurança dos dados e das regras de negócio através de validações nos atributos das classes. A herança e a abstração foram utilizadas para organizar de forma lógica o nosso catálogo. Já o polimorfismo flexibiliza a aplicação, permitindo tratar dinamicamente diferentes formas de pagamento e cálculos do sistema.
+Para os restaurantes, o sistema atua como uma plataforma de gestão de cardápio e pedidos. Cada restaurante cadastrado pode registrar e organizar seus produtos (pratos, bebidas e categorias), além de visualizar os pedidos recebidos. Dessa forma, o restaurante consegue gerenciar seu menu e acompanhar os pedidos feitos pelos clientes em tempo real dentro do sistema.
+
+E para os entregadores, o encapsulamento garante a integridade dos dados, enquanto herança e abstração organizam o sistema. O polimorfismo adapta o comportamento, tornando o acompanhamento e atualização das entregas mais ágil. 
 
 ## Funcionalidades Principais ⚙️
 1. **Gestão de Clientes:** Cadastro com validação de dados (CPF, Telefone, Endereço).
@@ -32,6 +34,7 @@ A arquitetura do sistema foi desenhada com foco na aplicação prática dos quat
 * `Entregador`: Armazenar as informações básicas como nome, CPF, telefone e status.
 * `Database`: Ele é o principal responsável por estabelecer uma conexão com um banco de dados.
 * `Cliente`: Responsável por gerenciar os dados e informações do usuário.
+* `CMD`: Uma entidade para escrever no console de forma mais rapida.
 * `IUsuario`: Define as operações básicas de interação do usuário no sistema.
 * `UserCliente`: Ela controla as ações que o cliente pode fazer no sistema do delivery.
 * `UserEntregador`: Representa a área de interação do entregador no sistema.
