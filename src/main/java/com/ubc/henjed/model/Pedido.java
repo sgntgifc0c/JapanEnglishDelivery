@@ -163,12 +163,37 @@ public class Pedido extends Model<Pedido> {
         this.status = status;
     }
 
+    public String translateStatus() {
+        var result = "";
+        switch (this.status) {
+            case 'P':
+                result = "EM PREPARAÇÃO";
+                break;
+            case 'R':
+                result = "PRONTO";
+                break;
+            case 'E':
+                result = "EM ENTREGA";
+                break;
+            case 'F':
+                result = "ENTREGUE";
+                break;
+            case 'C':
+                result = "CANCELADO";
+                break;
+            default:
+                result = "ERRO";
+                break;
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return String.format(
-            "ID: %d | Status: %c",
+            "ID: %d | Status: %s",
             this.getCodigo(),
-            this.getStatus()
+            this.translateStatus()
         );
     }
 }

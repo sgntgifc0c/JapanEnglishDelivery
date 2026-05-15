@@ -154,7 +154,7 @@ public abstract class Model<T extends Model<T>> {
 
         var rowsCreated = st.executeUpdate();
 
-        System.out.println("rows created: " + rowsCreated);
+        // System.out.println("rows created: " + rowsCreated);
 
         var rs = st.getGeneratedKeys();
 
@@ -183,9 +183,9 @@ public abstract class Model<T extends Model<T>> {
         insertValues(st, 0);
         st.setInt(getCounter(), codigo);
 
-        int rowsUpdated = st.executeUpdate();
+        /* int rowsUpdated  = */ st.executeUpdate();
 
-        System.out.println("rows updated: " + rowsUpdated);
+        // System.out.println("rows updated: " + rowsUpdated);
     }
 
     public void sendDelete(Connection conn) throws SQLException {
@@ -202,9 +202,9 @@ public abstract class Model<T extends Model<T>> {
 
         st.setInt(1, codigo);
 
-        int rowsDeleted = st.executeUpdate();
+        /* int rowsDeleted = */ st.executeUpdate();
 
-        System.out.println("rows deleted: " + rowsDeleted);
+        // System.out.println("rows deleted: " + rowsDeleted);
 
         this.existsInDB = false;
         this.codigo = 0;

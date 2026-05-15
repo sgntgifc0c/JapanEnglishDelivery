@@ -15,8 +15,13 @@ public class Entregador extends Model<Entregador> {
     protected String telefone;
     protected char status;
 
-    public ArrayList<Veiculo> getAllVeiculos(Connection conn) throws SQLException, Exception {
-        return new Veiculo().getCollection(conn, "WHERE codigo_entregador = ?", this.getCodigo());
+    public ArrayList<Veiculo> getAllVeiculos(Connection conn)
+        throws SQLException, Exception {
+        return new Veiculo().getCollection(
+            conn,
+            "WHERE codigo_entregador = ?",
+            this.getCodigo()
+        );
     }
 
     @Override
@@ -101,8 +106,33 @@ public class Entregador extends Model<Entregador> {
         this.status = status;
     }
 
+    public String translateStatus() {
+        var result = "";
+        switch (this.status) {
+            case 'D':
+                result = "DISPONIVEL";
+                break;
+            case 'I':
+                result = "INDISPONIVEL";
+                break;
+            case 'E':
+                result = "EM ENTREGA";
+                break;
+            default:
+                result = "ERRO";
+                break;
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
-        return String.format("Nome: %s | Status: %s | Telefone: %s | CPF: %s", this.getNome(),this.getStatus(),this.getTelefone(),this.getCpf());
+        return String.format(
+            "Nome: %s | Status: %s | Telefone: %s | CPF: %s",
+            this.getNome(),
+            this.translateStatus(),
+            this.getTelefone(),
+            this.getCpf()
+        );
     }
 }

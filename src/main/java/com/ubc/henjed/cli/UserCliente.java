@@ -68,7 +68,7 @@ public class UserCliente implements IUsuario {
                     var end_res = restaurante.getEndereco(conn);
                     CMD.msg(restaurante.toString());
                     CMD.msg(end_res.toString());
-                    CMD.msg("\n");
+                    CMD.msg("----");
                 }
                 break;
             case 4:
@@ -136,10 +136,8 @@ public class UserCliente implements IUsuario {
         if (CMD.YorN("Pagar Pedido?")) {
             CMD.msg("Obrigado, seu pedido chegara em breve!");
         } else {
-            for (ItemPedido item : pedido.getAllItems(conn)) {
-                item.sendDelete(conn);
-            }
-            pedido.sendDelete(conn);
+            pedido.setStatus('C');
+            pedido.sendUpdate(conn);
             CMD.msg("Pedido cancelado, voltando");
         }
     }

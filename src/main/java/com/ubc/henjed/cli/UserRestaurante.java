@@ -29,7 +29,8 @@ public class UserRestaurante implements IUsuario {
         CMD.msg("4 - Editar informações do Restaurante");
         CMD.msg("5 - Editar Produtos no Cardapio");
         CMD.msg("6 - Exibir Histórico de Pedidos");
-        CMD.msg("7 - Sair");
+        CMD.msg("7 - Atualizar um pedido para PRONTO");
+        CMD.msg("8 - Sair");
     }
 
     public boolean selecao() throws SQLException, Exception {
@@ -81,10 +82,61 @@ public class UserRestaurante implements IUsuario {
                     var end_res = cliente.getEndereco(conn);
                     CMD.msg(cliente.toString());
                     CMD.msg(end_res.toString());
-                    CMD.msg("\n");
+                    CMD.msg("----");
                 }
                 break;
             case 7:
+                var pedidosEmPreparacao = new Pedido().getCollection(
+                    conn,
+                    "WHERE codigo_restaurante = ? AND status IN ('P', 'R')",
+                    this.restaurante.getCodigo()
+                );
+                for (Pedido pedido : pedidosEmPreparacao) {
+                    CMD.msg(pedido.toString());
+                    var itensDoPedido = pedido.getAllItems(conn);
+                    for (ItemPedido item : itensDoPedido) {
+                        CMD.msg(item.toString());
+                    }
+                    var cli = pedido.getCliente(conn);
+                    CMD.msg(cli.toString());
+                    CMD.msg("------");
+                }
+                var id = Integer.valueOf(
+                    CMD.promptLine(
+                        "Selecione qual desses pedidos você deseja mudar seu status",
+                        100
+                    )
+                );
+                var pedido = new Pedido();
+                pedido.getByCodigo(conn, id);
+                if (
+                    !pedido.doesItExist() ||
+                    pedido.getCodigoRestaurante() !=
+                    this.restaurante.getCodigo()
+                ) {
+                    CMD.msg("ID Invalido, escreva denovo");
+                    break;
+                }
+
+                var done = false;
+                var result = "";
+                while (!done) {
+                    result = CMD.promptLine(
+                        "Selecione, esse pedido esta Pronto ou esta em Preparo? (R ou P respectivamente)",
+                        1
+                    );
+                    if (result != "P" && result != "R") {
+                        CMD.msg("Resposta Invalida, tente denovo");
+                        continue;
+                    }
+                    done = true;
+                }
+
+                pedido.setStatus(result.charAt(0));
+                pedido.sendUpdate(conn);
+                CMD.msg("Pedido Atualizado!");
+                break;
+            case 8:
                 sair = true;
                 break;
             default:
@@ -107,15 +159,7 @@ public class UserRestaurante implements IUsuario {
         );
 
         for (Produto produto : list) {
-            var fmt = String.format(
-                "Nome: %s | Descrição: %s | Preço: %f | Categoria: %s | ID: %d",
-                produto.getNome(),
-                produto.getDescricao(),
-                produto.getPreco(),
-                produto.getCategoria(),
-                produto.getCodigo()
-            );
-            CMD.msg(fmt);
+            CMD.msg(produto.toString());
         }
     }
 }
